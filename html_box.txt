@@ -1,0 +1,1 @@
+<input id="checkbox_{gene_id}" ,="" type="checkbox" value="False" name="select" class="selection_box" selected_id="{gene_id}">

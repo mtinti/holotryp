@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link href="css/c3.css" rel="stylesheet">  
+
+
     <title>Jumbotron Template for Bootstrap</title>
 
    
     
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
+    <!-- Custom styles for this template
+    <link href="jumbotron.css" rel="stylesheet"> -->
   </head>
 
   <body>
@@ -47,8 +49,8 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <input id = "searchbox" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Reload Page</button>
         </form>
       </div>
     </nav>
@@ -56,103 +58,117 @@
     <main role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div class="jumbotron" style="height:200px">
         <div class="container">
           <h1 class="display-3">Hello, world!</h1>
-          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+          <p>This is a template</p>
         </div>
       </div>
 
       <div class="container">
         <!-- Example row of columns -->
-        <div class="row">
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <div id="chart1"></div>
-           </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
 
-            <div id="chart2"></div>
+
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="row"> 
+              <div class="col-md-6">
+                <h2>Turnover BSF</h2>
+                <div id="chart1"></div>
+              </div>
+
+              <div class="col-md-6">
+                <h2>Turnover PCF</h2>
+                <div id="chart2"></div>
+              </div>
+            </div>
+
+            <div class="row"> 
+              <div class="col-md-6">
+                <h2>SEC300</h2>
+                <div id="chart3"></div>
+              </div>
+
+              <div class="col-md-6">
+                <h2>SEC1000</h2>
+                <div id="chart4"></div>
+              </div>
+            </div>
+
+            <div class="row"> 
+              <div class="col-md-6">
+                <h2>SAX</h2>
+                <div id="chart5"></div>
+              </div>
+
+              <div class="col-md-6">
+                <h2>Heading</h2>
+                <div id="chart6"></div>
+              </div>
+            </div>
+
+            <div class="row"> 
+              <div class="col-md-12">
+
+                <ul class="list-group">
+              
+                  <li>
+                  <protvista-track length="770">
+                    <protvista-feature-adapter>
+                      <data-loader>
+                        <source
+                        src="https://www.ebi.ac.uk/proteins/api/features/P18031?categories=MOLECULE_PROCESSING"
+                        />
+                      </data-loader>
+                    </protvista-feature-adapter>
+                  </protvista-track>
+                </li>
+    
+                <li>
+                  <protvista-feature-adapter subscribers="#my-protvista-track">
+                    <data-loader>
+                      <source
+                        src="https://www.ebi.ac.uk/proteins/api/features/P05067?categories=MOLECULE_PROCESSING"
+                      />
+                    </data-loader>
+                  </protvista-feature-adapter>
+                  <protvista-track length="770" id="my-protvista-track" />
+                </li>
+                </ul>
+
+
+              </div>
+            </div>
+
+
 
           </div>
-          
+
+
+
           <div class="col-md-4">
-            <h2>Heading</h2>
-            <table id="table_id" class="display">
-                <thead>
-                    <tr>
-                        <th>Column 1</th>
-                        <th>Column 2</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Row 1 Data 1</td>
-                        <td>Row 1 Data 2</td>
-                    </tr>
-                    <tr>
-                        <td>Row 2 Data 1</td>
-                        <td>Row 2 Data 2</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="position:fixed">
+              <h2></h2>
+              <style>
+                th { font-size: 12px; }
+                td { font-size: 11px; }
+                label { font-size: 11px; }
+                .paginate_button { font-size: 11px; }
+              </style>
+              <table id="table1" class="display"></table>
+            </div>
+
           </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-4">
-              <h2>Heading</h2>
-              <div id="chart3"></div>
-             </div>
-            <div class="col-md-4">
-              <h2>Heading</h2>
-  
-              <div id="chart4"></div>
-  
-            </div>
-            
-            <div class="col-md-4">
-              <h2>Heading</h2>
-              <div id="chart5"></div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-              <h2>Heading</h2>
-              <div id="chart6"></div>
-             </div>
-            <div class="col-md-8">
-              <h2>Heading</h2>
-  
-              
-              <ul class="list-group">
-                <li class="list-group-item">Cras justo odio
-                    <protvista-track length="770">
-                        <protvista-feature-adapter>
-                          <data-loader>
-                            <source
-                              src="https://www.ebi.ac.uk/proteins/api/features/P05067?categories=MOLECULE_PROCESSING"
-                            />
-                          </data-loader>
-                        </protvista-feature-adapter>
-                      </protvista-track>
-                    </li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
-
-
-
-              
-  
-            </div>
-            
 
         </div>
+        
+
+
+
+
+
 
         <hr>
 
@@ -173,116 +189,268 @@
     <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="js/c3.min.js"></script>
+    <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/babel-polyfill" defer></script>
     <!-- Web component polyfill (only loads what it needs) -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@webcomponents/custom-elements@latest"
-      defer
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@webcomponents/custom-elements@latest" defer></script>
     <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@webcomponents/custom-elements@latest/src/native-shim.js"
-      defer
-    ></script>   
+    <script src="https://cdn.jsdelivr.net/npm/@webcomponents/custom-elements@latest/src/native-shim.js" defer></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/protvista-utils@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/data-loader@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/protvista-feature-adapter@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/protvista-zoomable@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/protvista-track@latest" defer></script>
+    <script src="js/myUtils.js"></script>
+    <script src="js/charts.js"></script>
 
+    
+    <script>
+      var x_array_300 = range(1, 49, 1, true);
+      replaceByIndex(x_array_300,"f8",'1200')
+      replaceByIndex(x_array_300,"f14",'660')
+      replaceByIndex(x_array_300,"f22",'450')
+      replaceByIndex(x_array_300,"f26",'150')
+      replaceByIndex(x_array_300,"f32",'70')
+      replaceByIndex(x_array_300,"f40",'21')
+      replaceByIndex(x_array_300,"f45",'8')
+      var x_array_1000 = range(1, 49, 1, true);
+      replaceByIndex(x_array_1000,"f31",'1200')
+      replaceByIndex(x_array_1000,"f37",'660')
+      replaceByIndex(x_array_1000,"f46",'150')
 
-    <script
-    src="https://cdn.jsdelivr.net/npm/protvista-utils@latest"
-    defer
-  ></script>
-  <script src="https://cdn.jsdelivr.net/npm/data-loader@latest" defer></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/protvista-feature-adapter@latest"
-    defer
-  ></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/protvista-zoomable@latest"
-    defer
-  ></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/protvista-track@latest"
-    defer
-  ></script>
-  
-
-
-
-
+    </script>
 
     <script>
-        var chart = c3.generate({
-            bindto: '#chart1',
-            data: {
-            columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 50, 20, 10, 40, 15, 25]
-            ]
-            }
-        });
 
-        var chart = c3.generate({
-            bindto: '#chart2',
-            data: {
-            columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 50, 20, 10, 40, 15, 25]
-            ]
-            }
-        });
+      var file_table = "intable.csv";
+      var file_graph = "indata.tsv";
+      var dictionary_data ={};
 
 
-        var chart = c3.generate({
-            bindto: '#chart3',
-            data: {
-            columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 50, 20, 10, 40, 15, 25]
-            ]
-            }
-        });
+
+      Promise.all([d3.tsv(file_table), d3.tsv(file_graph)]).then(function(files) {
 
 
-        var chart = c3.generate({
-            bindto: '#chart4',
-            data: {
-            columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 50, 20, 10, 40, 15, 25]
-            ]
-            }
-        });
+        dictionary_data = fromFileToDict(files[1]);
+        //just for development
+        console.log('dictionary_data', dictionary_data);
+        //safe, outputs first 3 elements of first column
+        console.log('dictionary_data', dictionary_data[
+          Object.keys(dictionary_data)[0]].slice(0, 3) );
 
 
-        var chart = c3.generate({
-            bindto: '#chart5',
-            data: {
-            columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 50, 20, 10, 40, 15, 25]
-            ]
-            }
-        });
 
-        var chart = c3.generate({
-            bindto: '#chart6',
-            data: {
-            columns: [
-                ['data1', 30, 200, 100, 400, 150, 250],
-                ['data2', 50, 20, 10, 40, 15, 25]
-            ]
-            }
-        });
+        var columns = ['Gene_Id',  'Gene_desc', 'Box'];
+        tabulate(files[0], columns, '#table1');
+    
+
+
+        var table = $('#table1').DataTable({
+          //dom: "Bfrtip",
+          dom: "lrtBp",
+          buttons: ['csv'],
+          pageLength: 10,
+          filter: true,
+          lengthMenu: [[-1, 10, 20, 25, 50, 100 ], 
+          [ 'Show all', '10 rows', '20 rows', '25 rows', '50 rows', '100 rows' ]],
+          scrollY: 250,
+          columnDefs: [
+                  {"targets": 0 },
+                  {"targets": 1 },
+                  {"targets": 2,  "searchable": false, "orderable": true,
+                  "orderDataType": "dom-checkbox"},
+                ],
         
+        }
+        );
+        
+        $("#searchbox").keyup(function() {
+          table.search(this.value).draw();
+        }); 
+
+
+        //add listener when all roow tables are visible in dom
+        $('#table1 tbody').on('click', 'input[type="checkbox"]', function() { 
+          if (this.checked) { 
+            console.log($(this).attr("selected_id"), 'cheked');
+            var prot_id = $(this).attr("selected_id");
+            console.log('prot_id checked', prot_id);
+            //add_plot(prot_id, chart_bsf, chart_pcf);
+            //add_legend(prot_id, [chart_bsf, chart_pcf] );
+            //console.log(this);
+            this.value = 'True';
+            //console.log('chart1', chart1);
+            if (prot_id in dictionary_data){
+
+              chart1.load({
+                          columns: [
+                            [prot_id].concat(dictionary_data[prot_id].slice(0,7)),
+                            ['x',0,0.5,1,2,4,8,12],
+                          ]
+              });
+
+              chart2.load({
+                          columns: [
+                            [prot_id].concat(dictionary_data[prot_id].slice(7,16)),
+                            ['x',0,0.25,0.5,1,2,4,8,20,28],
+                          ]
+              });
+
+              chart3.load({
+                          columns: [
+                            [prot_id].concat(dictionary_data[prot_id].slice(16,64)),
+                            ['x'].concat(x_array_300),
+                          ]
+              });
+
+              chart4.load({
+                          columns: [
+                            [prot_id].concat(dictionary_data[prot_id].slice(64,112)),
+                            ['x'].concat(x_array_1000),
+
+                          ]
+              });
+
+              chart5.load({
+                          columns: [
+                            [prot_id].concat(dictionary_data[prot_id].slice(112,207)),
+                            ['x'].concat(range(1, 95, 1, true)),
+
+                          ]
+              });
+
+
+              var someIsNotZero = dictionary_data[prot_id].slice(0,7).some(item => item !== 0);
+              if (!someIsNotZero){
+                chart1.hide([prot_id]);
+                console.log('im hiding');
+              }             
+
+              var someIsNotZero = dictionary_data[prot_id].slice(7,16).some(item => item !== 0);
+              if (!someIsNotZero){
+                chart2.hide([prot_id]);
+                console.log('im hiding');
+              }
+
+              var someIsNotZero = dictionary_data[prot_id].slice(16,64).some(item => item !== 0);
+              if (!someIsNotZero){
+                chart3.hide([prot_id]);
+                console.log('im hiding');
+              }
+
+              var someIsNotZero = dictionary_data[prot_id].slice(64,112).some(item => item !== 0);
+              if (!someIsNotZero){
+                chart4.hide([prot_id]);
+                console.log('im hiding');
+              }  
+              
+              var someIsNotZero = dictionary_data[prot_id].slice(112,207).some(item => item !== 0);
+              if (!someIsNotZero){
+                chart5.hide([prot_id]);
+                console.log('im hiding');
+              } 
 
 
 
+            }
+            else {
+              alert("Hello! I am not in the dataset");
+              //$(this).prop("checked", false);
+            }
 
-    </script>
 
-    <script>
-        $(document).ready( function () {
-            $('#table_id').DataTable();
+
+          }
+          else {
+            //console.log($(this).attr("selected_id"), 'uncheked');
+            var prot_id = $(this).attr("selected_id");
+            console.log('prot_id unchecked', prot_id);
+            //remove_plot(prot_id, chart_bsf, chart_pcf);
+            //remove_legend(prot_id);
+            this.value = 'False'; 
+            if (prot_id in dictionary_data){
+              chart1.unload({ids: [prot_id]});
+              chart2.unload({ids: [prot_id]});
+              chart3.unload({ids: [prot_id]});
+              chart4.unload({ids: [prot_id]});
+              chart5.unload({ids: [prot_id]});
+
+            }
+
+          }
+            
+        });
+
+        
+        $('#table1 tbody').on('mouseover', 'tr', function () {
+          //console.log('mouseover');
+          var data = table.row( this ).data();
+          //alert( 'You clicked on '+data[0]+'\'s row' );
+          console.log('data[0]', data[0]);
+          chart1.select([data[0]])
+          chart2.select([data[0]])
+          chart3.select([data[0]])
+          chart4.select([data[0]])
+          chart5.select([data[0]])
+
+          //,.c3-target-'+data[0]
+          
+          //d3.select(jq('c3-chart-line-'+data[0])).style("stroke",'violet').style("stroke-width", '5px');
+          //var lines = d3.selectAll(".c3-chart-line").style("opacity", function(d){
+          //  return d.value === 100 ? 1 : 0;})
+
+          //console.log());
+          //var gene_acc = data['Gene_acc']
+          //var selector = '#prot_1_'+gene_acc;
+          //d3.select(selector).attr("r", "10").style("stroke",'violet').attr("stroke-width",'10');
+          //show_name(selector, 1)
+          //AddTooltip('table1', 'Hoover on me will higlight '+gene_acc)
+          //$('#image_place img').remove();
+          //$('#image_place').prepend('<img class="img-responsive" style="padding-top: 5px" id="theImg" src="figs/'+d.gene_acc+'.png" />')
         } );
+        
+        $('#table1 tbody').on('mouseout', 'tr', function () {
+          //console.log('mouseout');
+          var data = table.row( this ).data();
+          chart1.unselect([data[0]])
+          chart2.unselect([data[0]])
+          chart3.unselect([data[0]])
+          chart4.unselect([data[0]])
+          chart5.unselect([data[0]])
+          //alert( 'You clicked on '+data[0]+'\'s row' );
+          //console.log(data);
+          //var gene_acc = data['Gene_acc']
+          //var selector = '#prot_1_'+gene_acc;
+          //d3.select(selector).attr("r", "3").style("stroke",'')
+          //var selector = '#prot_2_'+gene_acc;
+          //d3.select(selector).attr("r", "3").style("stroke",'');
+          //d3.select("#t_1_"+data['Gene_acc']).remove();
+          //d3.select("#t_2_"+data['Gene_acc']).remove();
+        });
+        //console.log('tabe',d3.selectAll('#table1 tbody tr').enter().on('mouseenter', console.log('pippo')))
+        //.on('mouseenter', console.log('pippo'))
+      });
+    
+
+
+      $('document').ready(function(){
+        console.log('ready');
+        
+      });
+
     </script>
-</body>
+
+
+
+
+
+  </body>
+  <style>
+    .c3-circle._selected_ {
+      stroke-width: 3;
+    }
+  </style>
 </html>

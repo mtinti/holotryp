@@ -1,0 +1,242 @@
+
+
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div id="scattergraph"></div>
+      </div>
+      <div class="col-md-6">
+        <div id="scattergraph2"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<script>
+    //https://stackoverflow.com/questions/59098903/mouseover-is-not-working-in-d3-js-by-attaching-it-to-circles
+    function randomData(samples) {
+        let data = []
+    
+        for (let i = 0; i < samples; i++) {
+        data.push({
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+            size: Math.random() * 100
+        });
+        }
+        return data;
+    }
+    
+    data = randomData(50);
+    data2 = randomData(50);
+    data.forEach(function (d, i) {
+        data2[i]['x']=d['x']
+    });
+
+
+
+    
+    make_scatter(data, "#scattergraph", 'plot_1')
+    make_scatter(data2, "#scattergraph2", 'plot_2')
+
+    function make_scatter(data, bind_to, plot_id){
+        /* Finding biggest size */
+        let maxSize = Math.max.apply(Math, data.map(d => d.size));
+        console.log(maxSize);
+        
+        
+        let margin = {
+            top: 20,
+            right: 40,
+            bottom: 30,
+            left: 40
+            },
+            width = 400 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+        
+        var tooltip = d3.select(bind_to)
+            .append("div")
+            .style("opacity", 0.9)
+            .attr("class", "tooltip"+plot_id)
+            .style('position', 'absolute')
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "1px")
+            .style("border-radius", "5px")
+            .style("padding", "10px")
+            .style("display", "none");
+        
+        /* On hover we are able to see some data */
+        var mouseover = function(d) {
+            //console.log('here')
+            //console.log();
+            tooltip
+            .html("data:<p>" + d.x +'<p>'+d.y+'<p>'+d3.select(this).attr("id"))
+            //.style("top", (event.pageY-800)+"px").style("left",(event.pageX-800)+"px")
+            .style("left", (d3.mouse(this)[0] + 20) + "px")
+            .style("top", (d3.mouse(this)[1] + 50) + "px")
+            .transition()
+            .duration(500)
+            .style("display", "inline-block");
+        }
+        
+        /* on mouse leave we expect to stop seeing the info */
+        var mouseleave = function(d) {
+            tooltip
+            .transition()
+            .duration(500)
+            .style("display", "none");
+        }
+        
+        let x = d3.scaleLinear()
+            .range([0, width])
+            .nice();
+        
+        let y = d3.scaleLinear()
+            .range([height, 0])
+            .nice();
+        
+        let xAxis = d3.axisBottom(x).ticks(8),
+            yAxis = d3.axisLeft(y).ticks(8 * height / width);
+        
+        let brush = d3.brush().extent([
+            [0, 0],
+            [width, height]
+            ]).on("end", brushended),
+            idleTimeout,
+            idleDelay = 350;
+        
+        let svg = d3.select(bind_to).append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+        let clip = svg.append("defs").append("svg:clipPath")
+            .attr("id", "clip")
+            .append("svg:rect")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("x", 0)
+            .attr("y", 0);
+        
+        let xExtent = d3.extent(data, function(d) {
+            return d.x;
+        });
+        let yExtent = d3.extent(data, function(d) {
+            return d.y;
+        });
+        x.domain(d3.extent(data, function(d) {
+            return d.x;
+        })).nice();
+        y.domain(d3.extent(data, function(d) {
+            return d.y;
+        })).nice();
+        
+        let scatter = svg.append("g")
+            .attr("id", "scatterplot"+plot_id)
+            .attr("clip-path", "url(#clip)");
+        
+        // x axis
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr('id', "axis--x")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+        
+        svg.append("text")
+            .style("text-anchor", "end")
+            .text("X Label")
+            .attr("transform", function(d) {
+                return "translate(" + this.parentNode.getBBox().width / 2 + "," + 380 + ")";
+            });
+        
+        // y axis
+        svg.append("g")
+            .attr("class", "y axis")
+            .attr('id', "axis--y")
+            .call(yAxis);
+        
+        svg.append("text")
+            
+            .style("text-anchor", "end")
+            .text("Y Label")
+            .attr("transform", function(d) {
+                return "translate(" + -25 + "," + this.parentNode.getBBox().height / 2 + ") rotate(-90)";
+            });
+        
+        scatter.append("g")
+            .attr("class", "brush")
+            .call(brush);
+        
+        scatter.selectAll(".dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("id", function(d,i) {
+                //console.log(i);
+            return plot_id+'_'+i;
+            })
+            .attr("class", "dot")
+            .attr("r", 4)
+            .attr("cx", function(d) {
+            return x(d.x);
+            })
+            .attr("cy", function(d) {
+            return y(d.y);
+            })
+            .attr("opacity", 1)
+            .attr("stroke-width", 1)
+            .attr("stroke", "black")
+            .style("fill", 'aqua')
+            .on("mouseover", function() {
+            console.log('doing mouseovr')
+            })
+            .on("mousemove", mouseover)
+            .on("mouseout", mouseleave);
+        
+        function brushended() {
+        
+            let s = d3.event.selection;
+            if (!s) {
+            if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
+            x.domain(d3.extent(data, function(d) {
+                return d.x;
+            })).nice();
+            y.domain(d3.extent(data, function(d) {
+                return d.y;
+            })).nice();
+            } else {
+        
+            x.domain([s[0][0], s[1][0]].map(x.invert, x));
+            y.domain([s[1][1], s[0][1]].map(y.invert, y));
+            scatter.select(".brush").call(brush.move, null);
+            }
+            zoom();
+        }
+        
+        function idled() {
+            idleTimeout = null;
+        }
+        
+        function zoom() {
+            let t = scatter.transition().duration(750);
+            svg.select("#axis--x").transition(t).call(xAxis);
+            svg.select("#axis--y").transition(t).call(yAxis);
+            scatter.selectAll("circle").transition(t)
+            .attr("cx", function(d) {
+                return x(d.x);
+            })
+            .attr("cy", function(d) {
+                return y(d.y);
+            });
+        }
+}
+</script>
