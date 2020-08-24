@@ -450,13 +450,94 @@ var chart5 = c3.generate({
 
 });
 
+
 var chart6 = c3.generate({
     bindto: '#chart6',
+
+    tooltip: {
+        position: function () {
+            var position = c3.chart.internal.fn.tooltipPosition.apply(this, arguments);
+            position.top = 0;
+            return position;
+        },
+        grouped: false,
+        format: {
+            title: function (d) {return 'Fraction ' + d;}
+            //value: function (value, ratio, id) {console.log(value, ratio, id); return value;},
+        },
+        contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+            d.forEach(function(element, index, array) {
+                //d[index].id = d[index].id.split(';')[0];
+                d[index]['name']=d[index]['name'].split(';')[0];
+                //console.log(d[index]);
+            });
+            return this.getTooltipContent(d, defaultTitleFormat, defaultValueFormat, color);
+            }
+            //value: d3.format(',') // apply this format to both y and y2
+        },
+
     data: {
-    columns: [
-        ['data1', 30, 200, 100, 400, 150, 250],
-        ['data2', 50, 20, 10, 40, 15, 25]
-    ]
+        x: 'x',
+        columns: [
+
+        
+            ['x',0.5, 3, 5, 6, 7, 8, 9, 10, 11],
+            
+        ],
+        type: 'spline',
+        selection: {
+            grouped: true
+        },
+        selection: {
+            enabled: true
+          },
+    },
+    point: {
+        show: true,
+
+        select: {
+              r: 4
+        }
+    },
+    zoom: {
+        enabled: true,
+        //rescale: true,
+    },
+    legend: {
+        show: false
+    },
+
+    axis: {
+        x: {
+            //type: 'category',
+            label: {
+                text: 'Hours',
+                position: 'outer-center',
+            },
+            tick: {
+                values: [0, 2, 4, 6, 8, 10, 12],
+                fit: true,
+                outer: false,
+                multiline: false,
+            },
+            padding: {top:0, bottom:0},
+            max: 12.5,
+            min: 0,
+        },
+        y : {
+            label: {
+                text: 'Relative Abundance',
+                position: 'outer-center',
+            },
+            max: 1.1,
+            min: -0.1,
+            tick: {
+                format: function (d) { return d3.format('.2f')(d); }
+            },
+            padding: {top:5, bottom:0}
+        }
     }
+
 });
+
 

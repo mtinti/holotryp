@@ -103,7 +103,7 @@
               </div>
 
               <div class="col-md-6">
-                <h2>Heading</h2>
+                <h2>Cell Cycle</h2>
                 <div id="chart6"></div>
               </div>
             </div>
@@ -322,6 +322,14 @@
                           ]
               });
 
+              chart6.load({
+                          columns: [
+                            [prot_id].concat(dictionary_data[prot_id].slice(207,216)),
+                            ['x',0.5, 3, 5, 6, 7, 8, 9, 10, 11],
+
+                          ]
+              });              
+
 
               var someIsNotZero = dictionary_data[prot_id].slice(0,7).some(item => item !== 0);
               if (!someIsNotZero){
@@ -353,7 +361,11 @@
                 console.log('im hiding');
               } 
 
-
+              var someIsNotZero = dictionary_data[prot_id].slice(207,216).some(item => item !== 0);
+              if (!someIsNotZero){
+                chart6.hide([prot_id]);
+                console.log('im hiding');
+              } 
 
             }
             else {
@@ -377,6 +389,7 @@
               chart3.unload({ids: [prot_id]});
               chart4.unload({ids: [prot_id]});
               chart5.unload({ids: [prot_id]});
+              chart6.unload({ids: [prot_id]});
 
             }
 
@@ -395,6 +408,7 @@
           chart3.select([data[0]])
           chart4.select([data[0]])
           chart5.select([data[0]])
+          chart6.select([data[0]])
 
           //,.c3-target-'+data[0]
           
@@ -420,6 +434,8 @@
           chart3.unselect([data[0]])
           chart4.unselect([data[0]])
           chart5.unselect([data[0]])
+          chart6.unselect([data[0]])
+
           //alert( 'You clicked on '+data[0]+'\'s row' );
           //console.log(data);
           //var gene_acc = data['Gene_acc']

@@ -41,14 +41,17 @@ df.to_csv('intable.csv',index=False,quoting=csv.QUOTE_NONE, quotechar="",  escap
 
 
 # %%
+import pandas as pd
 start = pd.read_csv('turnover_in.tsv',sep='\t')
 complex_df = pd.read_csv('indata_complex.tsv',sep='\t',index_col=[0])
+cell_cycle_df = pd.read_csv('indata_cellcycle.tsv',sep='\t',index_col=[0])
 
+cell_cycle_df.head()
 # %%
 complex_df.head()
 
 # %%
-merge = pd.concat([start,complex_df]).reset_index(drop=True).fillna(0)
+merge = pd.concat([start,complex_df,cell_cycle_df]).reset_index(drop=True).fillna(0)
 #merge.describe()
 # %%
 merge.head()
