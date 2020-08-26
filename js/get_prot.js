@@ -21,7 +21,7 @@ function loadProtein(prot_id){
         //$( "#fv1" ).empty();
         //console.log('jq(string)',jq(string));
         var div_id = string.split('.').join("")+'-';
-        var li ="<li id='list-"+div_id+"'>"+string+"<div id='feat-"+div_id+"'></div></li>"
+        var li ="<li class='list-group-item' id='list-"+div_id+"'>"+string+"<div id='feat-"+div_id+"'></div></li>"
         console.log('div_id',div_id,li);
         $("#list-features").append(li);
         //console.log();

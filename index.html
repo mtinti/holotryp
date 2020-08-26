@@ -11,7 +11,21 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link href="css/c3.css" rel="stylesheet">  
     <link href="css/feature-viewer.min.css" rel="stylesheet">   
+    <style>
+      .c3-circle._selected_ {
+        stroke-width: 3;
+      }
+      th { font-size: 12px; }
+      td { font-size: 11px; }
+      .label { font-size: 11px; }
+      .paginate_button { font-size: 11px; }
 
+
+
+
+
+
+    </style>
 
     <title>Jumbotron Template for Bootstrap</title>
 
@@ -22,8 +36,7 @@
   </head>
 
   <body>
-
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark navbar-fixed-top bg-dark">
       <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -116,11 +129,7 @@
                 <style>
                   .header-help {visibility:hidden;}
                 </style>
-                <ul id="list-features" class="list-group">
-
-          
-
-
+                <ul id="list-features" class="list-group" >
                 </ul>
 
 
@@ -134,15 +143,10 @@
 
 
           <div class="col-md-4">
-            <div style="position:fixed">
-              <h2></h2>
-              <style>
-                th { font-size: 12px; }
-                td { font-size: 11px; }
-                label { font-size: 11px; }
-                .paginate_button { font-size: 11px; }
-              </style>
+            <div class="row" style="position:fixed">
+              <div class="col-md-10">
               <table id="table1" class="display"></table>
+            </div>
             </div>
 
           </div>
@@ -357,8 +361,9 @@
 
             }
             else {
-              alert("Hello! I am not in the dataset");
+              //alert("Hello! I am not in the dataset");
               //$(this).prop("checked", false);
+              console.log('not here');
             };
 
             
@@ -406,6 +411,9 @@
           chart4.select([data[0]])
           chart5.select([data[0]])
           chart6.select([data[0]])
+          
+          var div_id = 'list-'+data[0].split('.').join("")+'-';
+          $("#"+div_id).addClass("active");
 
           //,.c3-target-'+data[0]
           
@@ -432,6 +440,8 @@
           chart4.unselect([data[0]])
           chart5.unselect([data[0]])
           chart6.unselect([data[0]])
+          var div_id = 'list-'+data[0].split('.').join("")+'-';
+          $("#"+div_id).removeClass("active");
 
           //alert( 'You clicked on '+data[0]+'\'s row' );
           //console.log(data);
@@ -461,9 +471,5 @@
 
 
   </body>
-  <style>
-    .c3-circle._selected_ {
-      stroke-width: 3;
-    }
-  </style>
+
 </html>
