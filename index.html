@@ -205,6 +205,10 @@
 
     <script>
 
+      var request = $.getJSON( "https://enigmatic-crag-97840.herokuapp.com/dumpProtein/Tb04.24M18.150", function( data ) {
+      console.log('ping server', data['description']);
+      });
+
       var file_table = "intable.csv";
       var file_graph = "indata.tsv";
       var dictionary_data ={};

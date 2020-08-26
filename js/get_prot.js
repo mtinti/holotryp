@@ -5,7 +5,7 @@ function loadProtein(prot_id){
     //$("#fv1").text(string);
     //console.log('address',  "dumpProtein/"+string);
     
-    var request = $.getJSON( "http://134.36.66.166:8070/dumpProtein/"+string, function( data ) {
+    var request = $.getJSON( "https://enigmatic-crag-97840.herokuapp.com/dumpProtein/"+string, function( data ) {
 
         console.log('description', data['description']);
 
