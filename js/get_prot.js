@@ -40,6 +40,7 @@ function loadProtein(prot_id){
         var topology = [];
 
         var temp_data = data['SignalPeptide'];
+
         for (var i = 0; i < temp_data.length; i++) {
             var temp = {};
             temp['x']=temp_data[i][0]+1;
@@ -59,7 +60,12 @@ function loadProtein(prot_id){
 
             temp['id']='ExtraCellularDomain'+temp['x'].toString();
             temp['color']="#7FFF00";
-            temp['description']="Extra Cellular Domain";
+            if (data['SignalPeptide'].length == 0 && data['TransMembrane'].length == 0 ){
+                temp['description']="not sure / probably globular";
+                //console.log(data['TransMembrane'].length,data['SignalPeptide'].length);
+            }
+            else{temp['description']="Extra Cellular Domain";}
+            
             topology.push(temp)
         };
 
